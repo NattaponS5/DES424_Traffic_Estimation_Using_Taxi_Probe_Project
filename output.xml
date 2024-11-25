@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.9.20 on win32)" generated="2024-11-25T10:54:47.876100" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="D:\SIIT Y4\2024\Cloud-Based Application Development\Project\AddInfoToCsv\AddInfoToCsv\test.robot">
+<test id="s1-t1" name="Open Website And Verify Map Loads" line="24">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:48.157102" level="INFO">Opening browser 'Chrome' to base url 'https://main.d2xz524t6c5f8p.amplifyapp.com/'.</msg>
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-11-25T10:54:48.156103" elapsed="6.477172"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-11-25T10:54:54.634272" elapsed="0.031004"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${MAP_DIV}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-25T10:54:54.666280" elapsed="0.024994"/>
+</kw>
+<doc>Opens the website and verifies the map loads.</doc>
+<status status="PASS" start="2024-11-25T10:54:48.137102" elapsed="6.554172"/>
+</test>
+<test id="s1-t2" name="Verify Zoom In and Out Using Mouse Scrolling" line="30">
+<kw name="Open Website And Verify Map Loads">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:54.695278" level="INFO">Opening browser 'Chrome' to base url 'https://main.d2xz524t6c5f8p.amplifyapp.com/'.</msg>
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-11-25T10:54:54.694273" elapsed="2.432842"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.127642" elapsed="0.038302"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${MAP_DIV}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.166946" elapsed="0.018134"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:57.209236" level="INFO">Element 'id=map_a50e97e462c8de9c393b86f4b5d14f72' is displayed.</msg>
+<arg>${MAP_DIV}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.185080" elapsed="0.024156"/>
+</kw>
+<doc>Open the website and verify the map loads successfully.</doc>
+<status status="PASS" start="2024-11-25T10:54:54.694273" elapsed="2.515919"/>
+</kw>
+<kw name="Set Focus To Element" owner="SeleniumLibrary">
+<arg>${MAP_DIV}</arg>
+<doc>Sets the focus to the element identified by ``locator``.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.211192" elapsed="0.017887"/>
+</kw>
+<kw name="Repeat Keyword" owner="BuiltIn">
+<msg time="2024-11-25T10:54:57.230072" level="INFO">Repeating keyword, round 1/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:57.230072" level="INFO">Executing JavaScript:
+window.scrollBy(0, -50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, -50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.230072" elapsed="0.008067"/>
+</kw>
+<msg time="2024-11-25T10:54:57.238139" level="INFO">Repeating keyword, round 2/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:57.239139" level="INFO">Executing JavaScript:
+window.scrollBy(0, -50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, -50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.238139" elapsed="0.006856"/>
+</kw>
+<msg time="2024-11-25T10:54:57.244995" level="INFO">Repeating keyword, round 3/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:57.245462" level="INFO">Executing JavaScript:
+window.scrollBy(0, -50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, -50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.245462" elapsed="0.005529"/>
+</kw>
+<msg time="2024-11-25T10:54:57.250991" level="INFO">Repeating keyword, round 4/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:57.250991" level="INFO">Executing JavaScript:
+window.scrollBy(0, -50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, -50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.250991" elapsed="0.004514"/>
+</kw>
+<msg time="2024-11-25T10:54:57.255505" level="INFO">Repeating keyword, round 5/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:57.256507" level="INFO">Executing JavaScript:
+window.scrollBy(0, -50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, -50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.255505" elapsed="0.005075"/>
+</kw>
+<arg>5 Times</arg>
+<arg>Execute JavaScript</arg>
+<arg>window.scrollBy(0, -50)</arg>
+<doc>Executes the specified keyword multiple times.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.229748" elapsed="0.030832"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-11-25T10:54:58.276719" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-11-25T10:54:57.261542" elapsed="1.015177"/>
+</kw>
+<kw name="Repeat Keyword" owner="BuiltIn">
+<msg time="2024-11-25T10:54:58.277722" level="INFO">Repeating keyword, round 1/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:58.277722" level="INFO">Executing JavaScript:
+window.scrollBy(0, 50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, 50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:58.277722" elapsed="0.003997"/>
+</kw>
+<msg time="2024-11-25T10:54:58.281719" level="INFO">Repeating keyword, round 2/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:58.282720" level="INFO">Executing JavaScript:
+window.scrollBy(0, 50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, 50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:58.282720" elapsed="0.003001"/>
+</kw>
+<msg time="2024-11-25T10:54:58.285721" level="INFO">Repeating keyword, round 3/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:58.286720" level="INFO">Executing JavaScript:
+window.scrollBy(0, 50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, 50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:58.285721" elapsed="0.002999"/>
+</kw>
+<msg time="2024-11-25T10:54:58.288720" level="INFO">Repeating keyword, round 4/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:58.289720" level="INFO">Executing JavaScript:
+window.scrollBy(0, 50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, 50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:58.288720" elapsed="0.003000"/>
+</kw>
+<msg time="2024-11-25T10:54:58.291720" level="INFO">Repeating keyword, round 5/5.</msg>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:54:58.291720" level="INFO">Executing JavaScript:
+window.scrollBy(0, 50)
+Without any arguments.</msg>
+<arg>window.scrollBy(0, 50)</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-25T10:54:58.291720" elapsed="0.004004"/>
+</kw>
+<arg>5 Times</arg>
+<arg>Execute JavaScript</arg>
+<arg>window.scrollBy(0, 50)</arg>
+<doc>Executes the specified keyword multiple times.</doc>
+<status status="PASS" start="2024-11-25T10:54:58.276719" elapsed="0.019005"/>
+</kw>
+<kw name="Close Browser Safely">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-11-25T10:54:58.296721" elapsed="2.195358"/>
+</kw>
+<doc>Close the browser safely after operations.</doc>
+<status status="PASS" start="2024-11-25T10:54:58.295724" elapsed="2.196355"/>
+</kw>
+<doc>Check that zooming in and out with mouse scroll works.</doc>
+<status status="PASS" start="2024-11-25T10:54:54.692272" elapsed="5.800809"/>
+</test>
+<test id="s1-t3" name="Verify Traffic Lines" line="39">
+<kw name="Open Website And Verify Map Loads">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:55:00.494079" level="INFO">Opening browser 'Chrome' to base url 'https://main.d2xz524t6c5f8p.amplifyapp.com/'.</msg>
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-11-25T10:55:00.494079" elapsed="4.398174"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-11-25T10:55:04.893252" elapsed="0.033011"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${MAP_DIV}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-11-25T10:55:04.927250" elapsed="0.016003"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:55:04.962254" level="INFO">Element 'id=map_a50e97e462c8de9c393b86f4b5d14f72' is displayed.</msg>
+<arg>${MAP_DIV}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-25T10:55:04.943253" elapsed="0.019001"/>
+</kw>
+<doc>Open the website and verify the map loads successfully.</doc>
+<status status="PASS" start="2024-11-25T10:55:00.494079" elapsed="4.468175"/>
+</kw>
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:55:04.974254" level="INFO">${traffic_lines} = []</msg>
+<var>${traffic_lines}</var>
+<arg>class=${TRAFFIC_LINE_CLASS}</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2024-11-25T10:55:04.962254" elapsed="0.012000"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${way_id}</var>
+<arg>${line}</arg>
+<arg>data-way-id</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2024-11-25T10:55:04.976252" elapsed="0.000000"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<arg>${way_id}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" start="2024-11-25T10:55:04.976252" elapsed="0.000000"/>
+</kw>
+<kw name="Get Element Attribute" owner="SeleniumLibrary">
+<var>${stroke}</var>
+<arg>${line}</arg>
+<arg>stroke</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<status status="NOT RUN" start="2024-11-25T10:55:04.977256" elapsed="0.000000"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<arg>${stroke}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" start="2024-11-25T10:55:04.977256" elapsed="0.000000"/>
+</kw>
+<var name="${line}"/>
+<status status="NOT RUN" start="2024-11-25T10:55:04.975253" elapsed="0.002003"/>
+</iter>
+<var>${line}</var>
+<value>@{traffic_lines}</value>
+<status status="NOT RUN" start="2024-11-25T10:55:04.975253" elapsed="0.002003"/>
+</for>
+<doc>Verifies that all traffic lines have a way ID and a stroke.</doc>
+<status status="PASS" start="2024-11-25T10:55:00.493081" elapsed="4.485173"/>
+</test>
+<test id="s1-t4" name="Close Browser Successfully" line="50">
+<kw name="Open Website And Verify Map Loads">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:55:04.980253" level="INFO">Opening browser 'Chrome' to base url 'https://main.d2xz524t6c5f8p.amplifyapp.com/'.</msg>
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2024-11-25T10:55:04.980253" elapsed="4.226512"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-11-25T10:55:09.207766" elapsed="0.040005"/>
+</kw>
+<kw name="Wait Until Page Contains Element" owner="SeleniumLibrary">
+<arg>${MAP_DIV}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" start="2024-11-25T10:55:09.247771" elapsed="0.010996"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2024-11-25T10:55:09.280769" level="INFO">Element 'id=map_a50e97e462c8de9c393b86f4b5d14f72' is displayed.</msg>
+<arg>${MAP_DIV}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-25T10:55:09.259765" elapsed="0.022010"/>
+</kw>
+<doc>Open the website and verify the map loads successfully.</doc>
+<status status="PASS" start="2024-11-25T10:55:04.979253" elapsed="4.302522"/>
+</kw>
+<kw name="Close Browser Safely">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-11-25T10:55:09.283768" elapsed="2.184661"/>
+</kw>
+<doc>Close the browser safely after operations.</doc>
+<status status="PASS" start="2024-11-25T10:55:09.282771" elapsed="2.185658"/>
+</kw>
+<doc>Ensure the browser closes without errors.</doc>
+<status status="PASS" start="2024-11-25T10:55:04.978254" elapsed="6.491177"/>
+</test>
+<status status="PASS" start="2024-11-25T10:54:47.878101" elapsed="23.592330"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="4" fail="0" skip="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
