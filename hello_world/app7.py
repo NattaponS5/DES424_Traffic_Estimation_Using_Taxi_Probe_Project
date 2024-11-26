@@ -7,12 +7,14 @@ from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 import zipfile
 import io
+from folium.plugins import HeatMap, Search
+from folium import GeoJson, FeatureGroup
+import branca
 
 # Specify your AWS credentials
-aws_access_key_id='XXXXXXXXXXXXXXXXX',
-aws_secret_access_key='XXXXXXXXXXXXXXXXXXXXXX',
-aws_session_token='XXXXXXXXXXXXXXXXXXX',
-region_name='us-east-1'
+aws_access_key_id='XXXXXXXXXXXXXX'
+aws_secret_access_key='XXXXXXXXXXXXXXXXX'
+aws_session_token='XXXXXXXXXXXXXXXXXXXXX'
 
 # Connect to DynamoDB
 dynamodb = boto3.resource(
@@ -78,10 +80,22 @@ def fetch_data_from_dynamodb(timestamp):
 
 def generate_map_html(traffic_data, timestamp):
     """
-    Generate an HTML map based on traffic data.
+    Generate an interactive map with layer switching between traffic colors and heatmap.
     """
     map_center = [13.7563, 100.5018]
     m = folium.Map(location=map_center, zoom_start=12)
+
+    # Create groups for different layers
+    traffic_layer = FeatureGroup(name="Traffic Map").add_to(m)
+    heatmap_layer = FeatureGroup(name="Heatmap").add_to(m)
+
+    # Create GeoJson data structure for traffic roads
+    geojson_data = {
+        "type": "FeatureCollection",
+        "features": []
+    }
+
+    road_coords = []  # For heatmap
 
     way_ids = traffic_data['way_info_id'].astype(int).tolist()
     for i in range(0, len(way_ids), CHUNK_SIZE):
@@ -98,12 +112,95 @@ def generate_map_html(traffic_data, timestamp):
                     color = row['color'].values[0]
                     tags_name = row['tags_name_en'].values[0] if 'tags_name_en' in row else "Unknown"
 
+                    # Add polyline to traffic map layer
                     folium.PolyLine(
                         locations=coords,
                         color=color,
                         weight=5,
                         tooltip=f"Way ID: {way_id}, Tags: {tags_name}"
-                    ).add_to(m)
+                    ).add_to(traffic_layer)
+
+                    # Add to traffic GeoJson data
+                    geojson_data["features"].append({
+                        "type": "Feature",
+                        "properties": {
+                            "id": way_id,
+                            "tags_name_en": tags_name,
+                            "color": color,
+                        },
+                        "geometry": {
+                            "type": "LineString",
+                            "coordinates": [(node['lon'], node['lat']) for node in way['geometry']],
+                        },
+                    })
+
+                    
+
+                    # Add coordinates for heatmap
+                    road_coords.extend(coords)
+
+    # Add GeoJson layer for the traffic map
+    geojson_layer = GeoJson(geojson_data, name="Traffic Roads").add_to(heatmap_layer)
+
+    # Add HeatMap to the heatmap layer
+    HeatMap(road_coords, min_opacity=0.5, radius=10, blur=15).add_to(heatmap_layer)
+
+    # Add a Search plugin to the map, targeting the GeoJson layer
+    search = Search(
+        layer=geojson_layer,
+        search_label="tags_name_en",
+        placeholder="Search for roads...",
+        collapsed=False,
+    ).add_to(m)
+
+    # Add a LayerControl to toggle between traffic map and heatmap
+    folium.LayerControl(collapsed=False).add_to(m)
+
+        # Format the timestamp into a human-readable time
+    display_time = f"{timestamp[:2]}:{timestamp[2:]}"  # e.g., '0705' -> '07:05'
+
+    # Generate the current date in a readable format
+    current_date = pd.Timestamp.now().strftime('%d %b %Y')  # e.g., '26 Nov 2024'
+
+    # Define custom HTML content
+    custom_html = f"""
+    <div style="position: fixed; bottom: 20px; left: 20px; background-color: white; 
+                padding: 15px; border-radius: 8px; box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4); 
+                font-family: Arial, sans-serif; font-size: 14px; z-index: 1000;">
+        <h3 style="margin: 0;">Bangkok Live Traffic</h3>
+        <p style="margin: 4px 0;"><strong>Country:</strong> Thailand</p>
+        <p style="margin: 4px 0;"><strong>Date:</strong> {current_date}</p>
+        <p style="margin: 4px 0;"><strong>Location:</strong> Bangkok</p>
+        <p style="margin: 4px 0;"><strong>Time:</strong> {display_time}</p>
+    </div>
+    """
+
+    # Add the custom HTML overlay to the map
+    custom_element = folium.Element(custom_html)
+    m.get_root().html.add_child(custom_element)
+
+    # Add traffic legend (only for the traffic layer)
+    legend_html = """
+    <div style="position: fixed; bottom: 20px; right: 20px; background-color: white; 
+                padding: 15px; border-radius: 8px; box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4); 
+                font-family: Arial, sans-serif; font-size: 14px; z-index: 1000;">
+        <h4 style="margin: 0; text-align: center;">Traffic Legend</h4>
+        <p style="margin: 4px 0; display: flex; align-items: center;">
+            <span style="display: inline-block; width: 12px; height: 12px; background-color: green; margin-right: 8px; border-radius: 50%;"></span>
+            <strong>Green:</strong> No traffic delays
+        </p>
+        <p style="margin: 4px 0; display: flex; align-items: center;">
+            <span style="display: inline-block; width: 12px; height: 12px; background-color: orange; margin-right: 8px; border-radius: 50%;"></span>
+            <strong>Orange:</strong> Medium amount of traffic
+        </p>
+        <p style="margin: 4px 0; display: flex; align-items: center;">
+            <span style="display: inline-block; width: 12px; height: 12px; background-color: red; margin-right: 8px; border-radius: 50%;"></span>
+            <strong>Red:</strong> Traffic delays
+        </p>
+    </div>
+    """
+    legend_element = folium.Element(legend_html)
+    m.get_root().html.add_child(legend_element)
 
     # Save the map to a string
     html_content = m.get_root().render()
